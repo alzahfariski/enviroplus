@@ -66,6 +66,10 @@ class TImages {
   static const String onBoardingImage3 =
       "assets/images/on_boarding_images/onboarding3.png";
 
+  // -- Authentication
+  static const String loginImage =
+      "assets/images/authentication_image/login.png";
+
   // -- Products
   static const String productImage1 = "assets/images/products/nike-shoes.png";
   static const String productImage2 = "assets/images/products/product-1.png";

@@ -35,6 +35,7 @@ flutter:
     - assets/icons/categories/
     - assets/icons/payment_methods/
     - assets/images/on_boarding_images/
+    - assets/images/authentication_image/
   fonts:
     - family: Poppins
       fonts:

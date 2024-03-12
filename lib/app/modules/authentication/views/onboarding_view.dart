@@ -1,8 +1,8 @@
 import 'package:enviroplus/app/modules/authentication/controllers/onboarding_controller.dart';
-import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_dot_navigation.dart';
-import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_next_button.dart';
-import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_page.dart';
-import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_skip.dart';
+import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_widget/onboarding_dot_navigation.dart';
+import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_widget/onboarding_next_button.dart';
+import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_widget/onboarding_page.dart';
+import 'package:enviroplus/app/modules/authentication/views/widgets/onboarding_widget/onboarding_skip.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:enviroplus/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';

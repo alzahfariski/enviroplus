@@ -20,7 +20,7 @@ class OnBoardingNextButton extends StatelessWidget {
         final controller = Get.find<OnBoardingController>();
         return ElevatedButton(
           onPressed: () => controller.isLastPage.value
-              ? Get.off(const AuthenticationView())
+              ? Get.off(AuthenticationView())
               : controller.nextPage(),
           style: ElevatedButton.styleFrom(
             shape: const CircleBorder(side: BorderSide.none),

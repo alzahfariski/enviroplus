@@ -1,6 +1,6 @@
 import 'package:enviroplus/app/modules/authentication/views/onboarding_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:enviroplus/utils/constants/text_strings.dart';
 import 'package:enviroplus/utils/theme/theme.dart';
 
@@ -16,6 +16,8 @@ class App extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       // initialBinding: GeneralBindings(),
+      defaultTransition: Transition.rightToLeftWithFade,
+      transitionDuration: const Duration(milliseconds: 300),
       home: const OnBoardingView(),
     );
   }

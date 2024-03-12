@@ -69,6 +69,10 @@ class TImages {
   // -- Authentication
   static const String loginImage =
       "assets/images/authentication_image/login.png";
+  static const String registerImage =
+      "assets/images/authentication_image/register.png";
+  static const String verifyImage =
+      "assets/images/authentication_image/verify.png";
 
   // -- Products
   static const String productImage1 = "assets/images/products/nike-shoes.png";

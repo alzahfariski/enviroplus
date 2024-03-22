@@ -23,8 +23,9 @@ class OnBoardingNextButton extends StatelessWidget {
               ? Get.off(AuthenticationView())
               : controller.nextPage(),
           style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(side: BorderSide.none),
+            shape: const CircleBorder(),
             backgroundColor: TColors.primary,
+            padding: const EdgeInsets.all(16),
           ),
           child: Icon(
             controller.isLastPage.value

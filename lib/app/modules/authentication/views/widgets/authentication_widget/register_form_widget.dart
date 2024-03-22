@@ -23,14 +23,14 @@ class RegisterFormWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               label: Text(
@@ -50,14 +50,14 @@ class RegisterFormWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               label: Text(
@@ -77,14 +77,14 @@ class RegisterFormWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               label: Text(
@@ -101,6 +101,7 @@ class RegisterFormWidget extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),
               onPressed: () {
                 Get.to(() => const VerifyEmailView());
               },
@@ -119,8 +120,8 @@ class RegisterFormWidget extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-              ),
+                  backgroundColor: Colors.transparent,
+                  side: const BorderSide(width: 1, color: TColors.primary)),
               onPressed: () {
                 authController.register();
               },

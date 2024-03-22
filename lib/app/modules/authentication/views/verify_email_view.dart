@@ -1,8 +1,7 @@
-import 'package:enviroplus/app/data/common/appbar/appbar.dart';
-import 'package:enviroplus/app/data/common/custom_shape/header_container.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({super.key});
@@ -11,27 +10,27 @@ class VerifyEmailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TPrimaryHeaderContainer(
-            child: Column(
-              children: [
-                TAppBar(
-                  padding: 16,
-                  title: Container(),
-                  action: Container(),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Image(
-                    image: AssetImage(TImages.verifyImage),
-                  ),
-                ),
-              ],
-            ),
+          const Image(
+            image: AssetImage(TImages.verifyImage),
           ),
-          Padding(
-            padding: const EdgeInsets.all(30),
+          Container(
+            width: double.infinity,
+            height: 300,
+            decoration: const BoxDecoration(
+                color: TColors.dark,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                border: Border(
+                    top: BorderSide(
+                  width: 2,
+                  color: TColors.primary,
+                ))),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Verifikasi Email Kamu',
@@ -41,30 +40,44 @@ class VerifyEmailView extends StatelessWidget {
                 ),
                 Text(
                   'alzahfariski@gmail.com',
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: TColors.white,
+                        fontSize: 12,
                       ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                Text(
-                  'Cek pesan pada email anda. verifikasi email untuk mulai pernjalanan bersama enviro ',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: TColors.white,
-                      ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Text(
+                    'Cek pesan pada email anda. verifikasi email untuk mulai perjalanan bersama enviro ',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: TColors.white,
+                          fontSize: 12,
+                        ),
+                  ),
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Kirim Ulang',
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            color: TColors.primary,
-                          ),
-                    ),
+                const SizedBox(
+                  height: 30,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Kirim Ulang',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: TColors.primary,
+                        ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text(
+                    'Ganti Email',
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],

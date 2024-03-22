@@ -1,5 +1,5 @@
 import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
-import 'package:enviroplus/navigation_menu.dart';
+import 'package:enviroplus/app/modules/home/navbar/navigation_bottom.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,17 +20,17 @@ class LoginFormWidget extends StatelessWidget {
           TextField(
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(16),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(16),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               label: Text(
@@ -47,17 +47,17 @@ class LoginFormWidget extends StatelessWidget {
           TextField(
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(16),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(16),
                 borderSide: const BorderSide(
                   width: 1,
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               label: Text(
@@ -86,8 +86,11 @@ class LoginFormWidget extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: TColors.primary,
+              ),
               onPressed: () {
-                Get.to(() => const NavigationMenu());
+                Get.to(() => const BottomNavBar());
               },
               child: Text(
                 'Masuk',
@@ -104,8 +107,8 @@ class LoginFormWidget extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-              ),
+                  backgroundColor: Colors.transparent,
+                  side: const BorderSide(width: 1, color: TColors.primary)),
               onPressed: () {
                 authController.register();
               },

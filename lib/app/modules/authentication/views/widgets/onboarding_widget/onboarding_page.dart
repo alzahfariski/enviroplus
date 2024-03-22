@@ -25,7 +25,7 @@ class OnBoardingPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.left,
               ),
               const SizedBox(
@@ -33,16 +33,19 @@ class OnBoardingPage extends StatelessWidget {
               ),
               Text(
                 subtitle,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.left,
               ),
             ],
           ),
         ),
-        Image(
-          width: THelperFunctions.screenWidth(),
-          height: THelperFunctions.screenHeight() * 0.6,
-          image: AssetImage(image),
+        Padding(
+          padding: const EdgeInsets.all(24),
+          child: Image(
+            width: THelperFunctions.screenWidth(),
+            height: THelperFunctions.screenHeight() * 0.6,
+            image: AssetImage(image),
+          ),
         )
       ],
     );

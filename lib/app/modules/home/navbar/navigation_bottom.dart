@@ -1,3 +1,5 @@
+import 'package:enviroplus/app/modules/home/view/ecoquest_view.dart';
+import 'package:enviroplus/app/modules/home/view/ecoswap_view.dart';
 import 'package:enviroplus/app/modules/home/view/home_view.dart';
 import 'package:enviroplus/app/modules/home/view/profil_view.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
@@ -15,6 +17,8 @@ class BottomNavBar extends StatelessWidget {
     List<Widget> buildScreens() {
       return const [
         HomeView(),
+        EcoQuestView(),
+        EcoSwapView(),
         ProfilView(),
       ];
     }
@@ -24,6 +28,18 @@ class BottomNavBar extends StatelessWidget {
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.home),
           title: ("Home"),
+          activeColorPrimary: TColors.primary,
+          inactiveColorPrimary: TColors.grey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(Icons.star_half_sharp),
+          title: ("EcoQuest"),
+          activeColorPrimary: TColors.primary,
+          inactiveColorPrimary: TColors.grey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(Icons.group),
+          title: ("EcoSwap"),
           activeColorPrimary: TColors.primary,
           inactiveColorPrimary: TColors.grey,
         ),

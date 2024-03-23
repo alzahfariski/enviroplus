@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProfilView extends StatelessWidget {
-  const ProfilView({super.key});
+class EcoQuestView extends StatelessWidget {
+  const EcoQuestView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('4'),
+        child: Text('2'),
       ),
     );
   }

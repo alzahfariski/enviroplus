@@ -1,8 +1,10 @@
 import 'package:enviroplus/app/modules/home/widget/cuaca_widget.dart';
+import 'package:enviroplus/app/modules/location/view/location_view.dart';
 import 'package:enviroplus/utils/common_widgets/appbar.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -28,7 +30,10 @@ class HomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              action: const Icon(Icons.menu),
+              action: IconButton(
+                onPressed: () => Get.to(() => const LocationView()),
+                icon: const Icon(Icons.search),
+              ),
             ),
             const SizedBox(
               height: 30,

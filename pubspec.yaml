@@ -38,6 +38,8 @@ flutter:
     - assets/images/on_boarding_images/
     - assets/images/authentication_image/
     - assets/images/pollution/
+    - assets/images/products/
+    - assets/images/mission/
   fonts:
     - family: Rubik
       fonts:

@@ -16,7 +16,7 @@ class ProfilView extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: TColors.primary,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -43,7 +43,7 @@ class ProfilView extends StatelessWidget {
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
-                              color: Colors.amber,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: const Icon(

@@ -15,11 +15,11 @@ class BottomNavBar extends StatelessWidget {
 
     controller = PersistentTabController(initialIndex: 0);
     List<Widget> buildScreens() {
-      return const [
-        HomeView(),
+      return [
+        const HomeView(),
         EcoQuestView(),
-        EcoSwapView(),
-        ProfilView(),
+        const EcoSwapView(),
+        const ProfilView(),
       ];
     }
 

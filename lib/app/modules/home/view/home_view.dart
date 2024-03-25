@@ -219,6 +219,7 @@ class HomeView extends StatelessWidget {
               height: 20,
             ),
             GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 3,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
               shrinkWrap: true,

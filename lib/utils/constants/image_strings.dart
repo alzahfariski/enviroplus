@@ -79,6 +79,7 @@ class TImages {
 
   //pollution
   static const String pollution1 = "assets/images/pollution/buruk.png";
+  static const String pollution2 = "assets/images/pollution/baik.png";
 
   //Profile
   static const String user = "assets/images/content/user.png";

@@ -14,6 +14,7 @@ class MissionView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: GridView.builder(
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: 4,
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

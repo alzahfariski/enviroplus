@@ -1,4 +1,5 @@
 import 'package:enviroplus/utils/constants/colors.dart';
+import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -31,16 +32,22 @@ class PollutionView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+              const Image(
+                image: AssetImage(TImages.pollution2),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Text(
                 'Good',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(
                 'Udara Bebas Polusi',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Text(DateTime.now().toString()),
               const SizedBox(
@@ -83,6 +90,7 @@ class PollutionView extends StatelessWidget {
                 height: 20,
               ),
               GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 6,
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -128,6 +136,7 @@ class PollutionView extends StatelessWidget {
                 height: 20,
               ),
               ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 4,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {

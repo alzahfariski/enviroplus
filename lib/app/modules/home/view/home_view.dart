@@ -1,5 +1,6 @@
 import 'package:enviroplus/app/modules/home/widget/cuaca_widget.dart';
 import 'package:enviroplus/app/modules/location/view/location_view.dart';
+import 'package:enviroplus/app/modules/poluttion/view/pollution_view.dart';
 import 'package:enviroplus/utils/common_widgets/appbar.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
@@ -86,23 +87,26 @@ class HomeView extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'cek kualitas udara',
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: TColors.primary,
-                      ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Icon(
-                  Icons.arrow_circle_right_rounded,
-                  color: TColors.primary,
-                ),
-              ],
+            GestureDetector(
+              onTap: () => Get.to(() => const PollutionView()),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'cek kualitas udara',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: TColors.primary,
+                        ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Icon(
+                    Icons.arrow_circle_right_rounded,
+                    color: TColors.primary,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -158,7 +162,7 @@ class HomeView extends StatelessWidget {
                                   .labelLarge!
                                   .copyWith(
                                     color: TColors.dark,
-                                    fontSize: 8,
+                                    fontSize: 10,
                                   ),
                             ),
                             const Icon(
@@ -173,7 +177,7 @@ class HomeView extends StatelessWidget {
                                   .labelLarge!
                                   .copyWith(
                                     color: TColors.dark,
-                                    fontSize: 8,
+                                    fontSize: 10,
                                   ),
                             ),
                           ],

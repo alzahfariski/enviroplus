@@ -83,6 +83,7 @@ class TImages {
 
   //Profile
   static const String user = "assets/images/content/user.png";
+  static const String ranking = "assets/images/content/ranking.png";
 
   // -- Payment Methods
   static const String applePay = "assets/icons/payment_methods/apple-pay.png";

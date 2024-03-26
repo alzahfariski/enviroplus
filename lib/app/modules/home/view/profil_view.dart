@@ -100,6 +100,13 @@ class ProfilView extends StatelessWidget {
                 title: 'No Hp',
                 value: '082265432287',
               ),
+              const TextFieldProfil(
+                title: 'Pekerjaan',
+                value: 'Mahasiswa',
+              ),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

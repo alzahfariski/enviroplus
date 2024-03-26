@@ -1,4 +1,5 @@
 import 'package:enviroplus/app/modules/home/widget/cuaca_widget.dart';
+import 'package:enviroplus/app/modules/leaderboard/view/leaderboard_view.dart';
 import 'package:enviroplus/app/modules/location/view/location_view.dart';
 import 'package:enviroplus/app/modules/poluttion/view/pollution_view.dart';
 import 'package:enviroplus/utils/common_widgets/appbar.dart';
@@ -33,7 +34,7 @@ class HomeView extends StatelessWidget {
               ),
               action: IconButton(
                 onPressed: () => Get.to(() => const LocationView()),
-                icon: const Icon(Icons.search),
+                icon: const Icon(Icons.cloud),
               ),
             ),
             const SizedBox(
@@ -199,20 +200,23 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 24,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Leaderboard',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: TColors.primary,
-                        ),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: TColors.primary,
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: () => Get.to(() => const LeaderboardView()),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Leaderboard',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: TColors.primary,
+                          ),
+                    ),
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      color: TColors.primary,
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(

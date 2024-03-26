@@ -1,5 +1,6 @@
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:ming_cute_icons/ming_cute_icons.dart';
 
 class CuacaWidget extends StatelessWidget {
   const CuacaWidget({
@@ -21,7 +22,7 @@ class CuacaWidget extends StatelessWidget {
           const CircleAvatar(
             backgroundColor: Colors.white,
             child: Icon(
-              Icons.cloud,
+              MingCuteIcons.mgc_wind_line,
               color: TColors.accent,
             ),
           ),

@@ -69,9 +69,9 @@ class DetailChatView extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: TColors.primary.withOpacity(0.2),
+                color: const Color(0xff293038),
                 border: Border.all(
-                  color: TColors.primary,
+                  color: TColors.white,
                 ),
               ),
               child: Row(

@@ -64,20 +64,54 @@ class PollutionView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Indeks Polusi : 1',
+                      'Indeks Polusi : 1\nStatus Polusi : Baik',
                       style: Theme.of(context).textTheme.titleMedium,
+                      textAlign: TextAlign.center,
                     ),
                     LinearPercentIndicator(
                       width: MediaQuery.of(context).size.width - 50,
                       animation: true,
                       lineHeight: 10.0,
                       animationDuration: 2500,
-                      percent: 0.6,
+                      percent: 0.2,
                       barRadius: const Radius.circular(10),
                       progressColor: Colors.blue,
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'Rekomendasi',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ListView.builder(
+                itemCount: 3,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(bottom: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(
+                        width: 1,
+                        color: TColors.primary,
+                      ),
+                    ),
+                    child: Text(
+                      'Gunakan Masker Gunakan Masker',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 20,

@@ -30,7 +30,7 @@ class CommunityView extends StatelessWidget {
                     width: double.infinity,
                     height: 280,
                     decoration: BoxDecoration(
-                      color: TColors.white,
+                      color: const Color(0xff293038),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
@@ -39,51 +39,26 @@ class CommunityView extends StatelessWidget {
                         ListTile(
                           title: Text(
                             'Komputer Gaming',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium!
-                                .copyWith(
-                                  color: TColors.black,
-                                ),
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           subtitle: Text(
                             'Rp. 2000.000.000',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                  color: TColors.black.withOpacity(0.4),
-                                ),
+                            style: Theme.of(context).textTheme.labelLarge,
                           ),
                           trailing: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
                                 'Post By',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color: TColors.black,
-                                    ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               Text(
                                 'Alzah Fariski',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge!
-                                    .copyWith(
-                                      color: TColors.black.withOpacity(0.4),
-                                    ),
+                                style: Theme.of(context).textTheme.labelLarge,
                               ),
                               Text(
                                 '2 Mei 2024',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge!
-                                    .copyWith(
-                                      color: TColors.black.withOpacity(0.4),
-                                    ),
+                                style: Theme.of(context).textTheme.labelLarge,
                               ),
                             ],
                           ),
@@ -112,12 +87,8 @@ class CommunityView extends StatelessWidget {
                                   padding: const EdgeInsets.all(10),
                                   child: Text(
                                     'Lorem ipsum is a dummy text without any sense asdwasdwasdwasdw. It is a sequence of Latin',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge!
-                                        .copyWith(
-                                          color: TColors.black,
-                                        ),
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                   ),
@@ -127,7 +98,7 @@ class CommunityView extends StatelessWidget {
                                       Get.to(() => const DetailChatView()),
                                   icon: const Icon(
                                     Icons.message,
-                                    color: TColors.accent,
+                                    color: TColors.primary,
                                   ),
                                 ),
                               ],

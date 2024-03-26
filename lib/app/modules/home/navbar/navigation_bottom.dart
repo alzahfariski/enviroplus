@@ -18,7 +18,7 @@ class BottomNavBar extends StatelessWidget {
       return [
         const HomeView(),
         EcoQuestView(),
-        const EcoSwapView(),
+        EcoSwapView(),
         const ProfilView(),
       ];
     }

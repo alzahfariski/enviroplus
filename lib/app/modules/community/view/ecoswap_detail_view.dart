@@ -1,8 +1,6 @@
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class EcoSwapDeatilView extends StatelessWidget {
@@ -114,16 +112,19 @@ class EcoSwapDeatilView extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: Container(
-        padding: const EdgeInsets.all(16),
-        margin: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-          color: TColors.primary,
-          shape: BoxShape.circle,
-        ),
-        child: const Icon(
-          Icons.message,
-          color: TColors.black,
+      floatingActionButton: GestureDetector(
+        onTap: () {},
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.all(16),
+          decoration: const BoxDecoration(
+            color: TColors.primary,
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            Icons.message,
+            color: TColors.black,
+          ),
         ),
       ),
     );

@@ -72,7 +72,7 @@ class PollutionView extends StatelessWidget {
                       animation: true,
                       lineHeight: 10.0,
                       animationDuration: 2500,
-                      percent: 0.2,
+                      percent: 0.6,
                       barRadius: const Radius.circular(10),
                       progressColor: Colors.blue,
                     ),

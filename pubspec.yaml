@@ -15,6 +15,7 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
   http: ^1.2.1
+  image_picker: ^1.0.7
   intl: ^0.19.0
   logger: ^2.0.2+1
   percent_indicator: ^4.2.3
@@ -31,15 +32,13 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logos/
-    - assets/icons/brands/
     - assets/images/
-    - assets/icons/categories/
-    - assets/icons/payment_methods/
     - assets/images/on_boarding_images/
     - assets/images/authentication_image/
     - assets/images/pollution/
     - assets/images/products/
     - assets/images/mission/
+    - assets/images/content/
   fonts:
     - family: Rubik
       fonts:

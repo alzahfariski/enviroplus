@@ -30,8 +30,8 @@ class CommunityView extends StatelessWidget {
                     width: double.infinity,
                     height: 280,
                     decoration: BoxDecoration(
-                      color: const Color(0xff293038),
-                      borderRadius: BorderRadius.circular(20),
+                      color: TColors.darkContainer,
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

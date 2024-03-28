@@ -31,7 +31,7 @@ class MissionView extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: TColors.white,
+                  color: TColors.darkContainer,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
@@ -46,18 +46,12 @@ class MissionView extends StatelessWidget {
                                 .textTheme
                                 .bodyMedium!
                                 .copyWith(
-                                  color: TColors.black,
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
                           Text(
                             'Energi Elektronik',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                  color: TColors.black,
-                                ),
+                            style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ],
                       ),

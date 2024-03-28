@@ -1,3 +1,4 @@
+import 'package:enviroplus/app/modules/home/view/change_profil_option/change_profile_modal_bottom_sheet.dart';
 import 'package:enviroplus/app/modules/home/widget/textfield_profil_widget.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ class ProfilView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -40,17 +42,22 @@ class ProfilView extends StatelessWidget {
                         Positioned(
                           bottom: 0,
                           right: 0,
-                          child: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: const Icon(
-                              Icons.create,
-                              size: 18,
-                              color: Colors.black,
+                          child: GestureDetector(
+                            onTap: () =>
+                                ChangeProfilScreen.buildShowModalBottomSheet(
+                                    context, size),
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: const Icon(
+                                Icons.create,
+                                size: 18,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ),

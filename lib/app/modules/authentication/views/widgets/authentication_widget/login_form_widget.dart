@@ -1,4 +1,5 @@
 import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
+import 'package:enviroplus/app/modules/authentication/views/lupapass_view.dart';
 import 'package:enviroplus/app/modules/home/navbar/navigation_bottom.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,9 @@ class LoginFormWidget extends StatelessWidget {
             height: 10,
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const LupaPassView());
+            },
             child: Text(
               'Lupa password ?',
               style: Theme.of(context).textTheme.titleMedium!.copyWith(

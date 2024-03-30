@@ -1,3 +1,4 @@
+import 'package:enviroplus/app/modules/home/widget/polutan_widget.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,10 @@ class PollutionView extends StatelessWidget {
                 'Bengkulu',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
+              Text(
+                DateFormat.yMMMMEEEEd().format(DateTime.now()),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -37,22 +42,25 @@ class PollutionView extends StatelessWidget {
                 image: AssetImage(TImages.pollution2),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Text(
-                'Baik',
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Udara Bebas Polusi',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              Text(
-                DateFormat.yMMMMEEEEd().format(DateTime.now()),
-                style: Theme.of(context).textTheme.bodyMedium,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Status Polusi',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Baik',
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          color: TColors.primary,
+                        ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
@@ -68,7 +76,7 @@ class PollutionView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Indeks Polusi : 1\nStatus Polusi : Baik',
+                      'Indeks Polusi : 1',
                       style: Theme.of(context).textTheme.titleMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -96,22 +104,22 @@ class PollutionView extends StatelessWidget {
                 height: 20,
               ),
               ListView.builder(
-                itemCount: 3,
-                shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
+                itemCount: 4,
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(20),
                     margin: const EdgeInsets.only(bottom: 10),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(
                         width: 1,
                         color: TColors.primary,
                       ),
                     ),
                     child: Text(
-                      'Gunakan Masker Gunakan Masker',
+                      'Silahkan Beraktivitas',
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -119,7 +127,7 @@ class PollutionView extends StatelessWidget {
                 },
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(
                 'Konsentrasi polutan dalam μg/m3',
@@ -128,47 +136,64 @@ class PollutionView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 6,
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 6.0,
-                  crossAxisSpacing: 6.0,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: TColors.darkContainer.withOpacity(0.8),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          '0;20',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge!
-                              .copyWith(
-                                color: TColors.primary,
-                              ),
-                        ),
-                        Text(
-                          'Sulfur Dioksida',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              const Row(
+                children: [
+                  PolutanWIdget(
+                    angka: '0.640',
+                    nama: 'Sulfur Duioksida',
+                    zat: 'SO\u2082',
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  PolutanWIdget(
+                    angka: '0.640',
+                    nama: 'Sulfur Duioksida',
+                    zat: 'SO\u2082',
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  PolutanWIdget(
+                    angka: '0.640',
+                    nama: 'Sulfur Duioksida',
+                    zat: 'SO\u2082',
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Row(
+                children: [
+                  PolutanWIdget(
+                    angka: '0.640',
+                    nama: 'Sulfur Duioksida',
+                    zat: 'SO\u2082',
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  PolutanWIdget(
+                    angka: '0.640',
+                    nama: 'Sulfur Duioksida',
+                    zat: 'SO\u2082',
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  PolutanWIdget(
+                    angka: '0.640',
+                    nama: 'Sulfur Duioksida',
+                    zat: 'SO\u2082',
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 20,
               ),
               Text(
-                'Perkiraan data polusi udara',
+                'Ramalan Polusi Udara',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(
@@ -229,9 +254,6 @@ class PollutionView extends StatelessWidget {
                     ),
                   );
                 },
-              ),
-              const SizedBox(
-                height: 60,
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class PollutionView extends StatelessWidget {
@@ -26,8 +27,8 @@ class PollutionView extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Kabupaten Bengkulu',
-                style: Theme.of(context).textTheme.titleMedium,
+                'Bengkulu',
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(
                 height: 20,
@@ -39,7 +40,7 @@ class PollutionView extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Good',
+                'Baik',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(
@@ -49,7 +50,10 @@ class PollutionView extends StatelessWidget {
                 'Udara Bebas Polusi',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              Text(DateTime.now().toString()),
+              Text(
+                DateFormat.yMMMMEEEEd().format(DateTime.now()),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -75,7 +79,8 @@ class PollutionView extends StatelessWidget {
                       animationDuration: 2500,
                       percent: 0.2,
                       barRadius: const Radius.circular(10),
-                      progressColor: Colors.blue,
+                      progressColor: TColors.accent,
+                      backgroundColor: TColors.primary,
                     ),
                   ],
                 ),
@@ -211,7 +216,8 @@ class PollutionView extends StatelessWidget {
                               animationDuration: 2500,
                               percent: 0.2,
                               barRadius: const Radius.circular(10),
-                              progressColor: Colors.blue,
+                              progressColor: TColors.accent,
+                              backgroundColor: TColors.primary,
                             ),
                             Text(
                               'Status Polusi : Baik',

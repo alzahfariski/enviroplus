@@ -17,7 +17,7 @@ class BadgeWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: TColors.primary,
               ),
         ),
@@ -44,9 +44,10 @@ class BadgeWidget extends StatelessWidget {
                       TImages.pollution2,
                       width: MediaQuery.of(context).size.width / 5,
                     ),
-                    const Text(
+                    Text(
                       'title',
                       textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),

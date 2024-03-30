@@ -1,4 +1,3 @@
-import 'package:enviroplus/app/modules/home/widget/cuaca_widget.dart';
 import 'package:enviroplus/app/modules/leaderboard/view/leaderboard_view.dart';
 import 'package:enviroplus/app/modules/location/view/location_view.dart';
 import 'package:enviroplus/app/modules/poluttion/view/pollution_view.dart';
@@ -7,6 +6,8 @@ import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -34,41 +35,90 @@ class HomeView extends StatelessWidget {
               ),
               action: IconButton(
                 onPressed: () => Get.to(() => const LocationView()),
-                icon: const Icon(Icons.cloud),
+                icon: const Icon(Icons.air_outlined),
               ),
             ),
             const SizedBox(
               height: 30,
             ),
             Text(
-              'Status polusi udara',
-              style: Theme.of(context).textTheme.bodyMedium,
+              'Bengkulu',
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
-              'Buruk',
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: TColors.primary,
-                  ),
+              DateFormat.yMMMMEEEEd().format(DateTime.now()),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(
               height: 20,
             ),
-            const Image(
-              image: AssetImage(TImages.pollution1),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: CircularPercentIndicator(
+                radius: 120.0,
+                lineWidth: 10,
+                animation: true,
+                animationDuration: 2500,
+                percent: 0.6,
+                center: const Padding(
+                  padding: EdgeInsets.all(40),
+                  child: Image(
+                    image: AssetImage(TImages.pollution1),
+                  ),
+                ),
+                backgroundColor: TColors.primary,
+                progressColor: Colors.blue,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Indeks polusi :',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '1',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: TColors.primary,
+                      ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Status polusi :',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Baik',
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: TColors.primary,
+                      ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: GridView.builder(
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 2,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 7.0,
-                ),
                 itemBuilder: (context, index) {
                   return Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(bottom: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       border: Border.all(
@@ -76,17 +126,19 @@ class HomeView extends StatelessWidget {
                         color: TColors.primary,
                       ),
                     ),
-                    child: Text(
-                      'Gunakan Masker',
-                      style: Theme.of(context).textTheme.labelLarge,
-                      textAlign: TextAlign.center,
+                    child: Center(
+                      child: Text(
+                        'Gunakan Masker',
+                        style: Theme.of(context).textTheme.labelLarge,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   );
                 },
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             GestureDetector(
               onTap: () => Get.to(() => const PollutionView()),
@@ -94,7 +146,7 @@ class HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'cek kualitas udara',
+                    'Selengkapnya',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: TColors.primary,
                         ),
@@ -107,90 +159,6 @@ class HomeView extends StatelessWidget {
                     color: TColors.primary,
                   ),
                 ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                width: double.infinity,
-                height: 180,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Bengkulu',
-                          style:
-                              Theme.of(context).textTheme.labelLarge!.copyWith(
-                                    color: TColors.dark,
-                                    fontSize: 14,
-                                  ),
-                        ),
-                        Text(
-                          '28\u00B0',
-                          style:
-                              Theme.of(context).textTheme.labelLarge!.copyWith(
-                                    color: TColors.dark,
-                                    fontSize: 40,
-                                  ),
-                        ),
-                        const Icon(
-                          Icons.cloud,
-                          color: TColors.dark,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.arrow_upward,
-                              color: TColors.dark,
-                              size: 10,
-                            ),
-                            Text(
-                              '17\u00B0',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge!
-                                  .copyWith(
-                                    color: TColors.dark,
-                                    fontSize: 10,
-                                  ),
-                            ),
-                            const Icon(
-                              Icons.arrow_downward,
-                              color: TColors.dark,
-                              size: 10,
-                            ),
-                            Text(
-                              '10\u00B0',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge!
-                                  .copyWith(
-                                    color: TColors.dark,
-                                    fontSize: 10,
-                                  ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    const CuacaWidget(),
-                    const CuacaWidget(),
-                    const CuacaWidget(),
-                    const CuacaWidget(),
-                  ],
-                ),
               ),
             ),
             const SizedBox(

@@ -19,7 +19,7 @@ class ProfilView extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 decoration: BoxDecoration(
-                  color: TColors.primary,
+                  color: TColors.primary.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Column(
@@ -36,6 +36,11 @@ class ProfilView extends StatelessWidget {
                               image: AssetImage(
                                   'assets/images/pollution/lead.jpg'),
                               fit: BoxFit.cover,
+                            ),
+                            border: Border.all(
+                              width: 4,
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                              color: TColors.white,
                             ),
                           ),
                         ),
@@ -60,25 +65,6 @@ class ProfilView extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.stars,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          '87 Points',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: Colors.black,
-                                  ),
                         ),
                       ],
                     ),

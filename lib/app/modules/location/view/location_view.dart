@@ -27,16 +27,21 @@ class LocationView extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
-                    color: TColors.accent,
+                    color: TColors.darkContainer,
                   ),
                   child: const ListTile(
                     leading: Icon(
-                      Icons.cloud,
+                      Icons.air_outlined,
                     ),
                     title: Text('Bengkulu'),
-                    subtitle: Text('Buruk'),
+                    subtitle: Text(
+                      'Indeks Pollusi : 1',
+                    ),
                     trailing: Text(
-                      '28\u00B0',
+                      'Baik',
+                      style: TextStyle(
+                        color: TColors.primary,
+                      ),
                     ),
                   ),
                 ));

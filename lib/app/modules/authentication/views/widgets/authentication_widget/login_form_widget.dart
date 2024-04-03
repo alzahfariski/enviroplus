@@ -1,6 +1,6 @@
 import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
+import 'package:enviroplus/app/modules/authentication/controllers/sign_in_controller.dart';
 import 'package:enviroplus/app/modules/authentication/views/lupapass_view.dart';
-import 'package:enviroplus/app/modules/home/navbar/navigation_bottom.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,12 +13,15 @@ class LoginFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final signInController = Get.put(SignInController());
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          TextField(
+          TextFormField(
+            controller: signInController.username,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -45,7 +48,8 @@ class LoginFormWidget extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          TextField(
+          TextFormField(
+            controller: signInController.password,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -93,7 +97,7 @@ class LoginFormWidget extends StatelessWidget {
                 backgroundColor: TColors.primary,
               ),
               onPressed: () {
-                Get.to(() => const BottomNavBar());
+                signInController.handleSignIn();
               },
               child: Text(
                 'Masuk',

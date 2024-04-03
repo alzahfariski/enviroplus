@@ -18,9 +18,11 @@ dependencies:
   image_picker: ^1.0.7
   intl: ^0.19.0
   logger: ^2.0.2+1
+  lottie: ^3.1.0
   ming_cute_icons: ^0.0.4
   percent_indicator: ^4.2.3
   persistent_bottom_nav_bar: ^5.0.2
+  provider: ^6.1.2
   smooth_page_indicator: ^1.1.0
   url_launcher: ^6.2.5
 
@@ -40,6 +42,7 @@ flutter:
     - assets/images/products/
     - assets/images/mission/
     - assets/images/content/
+    - assets/lottie/
   fonts:
     - family: Rubik
       fonts:

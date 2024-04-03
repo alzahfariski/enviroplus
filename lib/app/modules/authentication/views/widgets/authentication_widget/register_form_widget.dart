@@ -1,5 +1,5 @@
 import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
-import 'package:enviroplus/app/modules/authentication/views/verify_email_view.dart';
+import 'package:enviroplus/app/modules/authentication/controllers/sign_up_controller.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,12 +12,15 @@ class RegisterFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final signUpController = Get.put(SignUpController());
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          TextField(
+          TextFormField(
+            controller: signUpController.username,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -44,7 +47,8 @@ class RegisterFormWidget extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          TextField(
+          TextFormField(
+            controller: signUpController.email,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -71,7 +75,8 @@ class RegisterFormWidget extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          TextField(
+          TextFormField(
+            controller: signUpController.password,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -103,7 +108,7 @@ class RegisterFormWidget extends StatelessWidget {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: TColors.primary),
               onPressed: () {
-                Get.to(() => const VerifyEmailView());
+                signUpController.handleSignUp();
               },
               child: Text(
                 'Daftar',

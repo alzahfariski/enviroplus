@@ -1,14 +1,17 @@
+import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
 import 'package:enviroplus/app/modules/home/view/ecoquest_view.dart';
 import 'package:enviroplus/app/modules/home/view/ecoswap_view.dart';
 import 'package:enviroplus/app/modules/home/view/home_view.dart';
 import 'package:enviroplus/app/modules/home/view/profil_view.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({super.key});
+  BottomNavBar({super.key});
 
+  final authenticationController = Get.put(AuthenticationController());
   @override
   Widget build(BuildContext context) {
     PersistentTabController controller;
@@ -16,7 +19,7 @@ class BottomNavBar extends StatelessWidget {
     controller = PersistentTabController(initialIndex: 0);
     List<Widget> buildScreens() {
       return [
-        const HomeView(),
+        HomeView(),
         EcoQuestView(),
         EcoSwapView(),
         const ProfilView(),

@@ -1,7 +1,9 @@
+import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
 import 'package:enviroplus/app/modules/home/view/change_profil_option/change_profile_modal_bottom_sheet.dart';
 import 'package:enviroplus/app/modules/home/widget/textfield_profil_widget.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfilView extends StatelessWidget {
   const ProfilView({super.key});
@@ -9,6 +11,7 @@ class ProfilView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final authenticationController = Get.put(AuthenticationController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -32,9 +35,11 @@ class ProfilView extends StatelessWidget {
                           height: 120,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(60),
-                            image: const DecorationImage(
-                              image: AssetImage(
-                                  'assets/images/pollution/lead.jpg'),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                authenticationController.user!.avatarUrl
+                                    .toString(),
+                              ),
                               fit: BoxFit.cover,
                             ),
                             border: Border.all(
@@ -81,21 +86,17 @@ class ProfilView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const TextFieldProfil(
+              TextFieldProfil(
                 title: 'Nama',
-                value: 'Alzah Fariski',
+                value: authenticationController.user!.username.toString(),
               ),
-              const TextFieldProfil(
+              TextFieldProfil(
                 title: 'Email',
-                value: 'Alzah@gmail.com',
+                value: authenticationController.user!.email.toString(),
               ),
-              const TextFieldProfil(
-                title: 'No Hp',
-                value: '082265432287',
-              ),
-              const TextFieldProfil(
+              TextFieldProfil(
                 title: 'Pekerjaan',
-                value: 'Mahasiswa',
+                value: authenticationController.user!.work.toString(),
               ),
               const SizedBox(
                 height: 20,

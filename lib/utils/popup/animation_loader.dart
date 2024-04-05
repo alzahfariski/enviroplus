@@ -30,9 +30,7 @@ class TAnimationLoaderWidget extends StatelessWidget {
           ),
           Text(
             text,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: TColors.dark,
-                ),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(
             height: 30,

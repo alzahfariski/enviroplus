@@ -11,7 +11,7 @@ class TFullScreenLoader {
       builder: (context) => PopScope(
         canPop: false,
         child: Container(
-          color: TColors.white,
+          color: TColors.darkContainer,
           width: double.infinity,
           height: double.infinity,
           child: Column(

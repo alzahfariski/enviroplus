@@ -1,3 +1,5 @@
+import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
+import 'package:enviroplus/app/modules/home/controller/home_controller.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,8 @@ class LeaderboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.put(HomeController());
+    final authenticationController = Get.put(AuthenticationController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -31,20 +35,24 @@ class LeaderboardView extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: 20,
+              itemCount: homeController.leaderboard.length,
               itemBuilder: (context, index) {
                 int num = index + 1;
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: ListTile(
-                    title: const Text("Nama"),
+                    title:
+                        Text("${homeController.leaderboard[index].username}"),
                     leading: Stack(
                       children: [
                         Container(
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: TColors.accent,
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  homeController.leaderboard[index].avatarUrl!),
+                            ),
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
@@ -77,7 +85,7 @@ class LeaderboardView extends StatelessWidget {
                       ],
                     ),
                     trailing: Text(
-                      '80 pts',
+                      '${homeController.leaderboard[index].point}',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: TColors.primary,
                           ),
@@ -85,7 +93,10 @@ class LeaderboardView extends StatelessWidget {
                   ),
                 );
               },
-            )
+            ),
+            const SizedBox(
+              height: 120,
+            ),
           ],
         ),
       ),
@@ -98,20 +109,14 @@ class LeaderboardView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              Text(
-                '100',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: TColors.black,
-                    ),
-              ),
-              const SizedBox(
-                width: 12,
-              ),
               Container(
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: TColors.accent,
+                  image: DecorationImage(
+                    image:
+                        NetworkImage(authenticationController.user!.avatarUrl!),
+                  ),
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -120,7 +125,7 @@ class LeaderboardView extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  "Anda",
+                  authenticationController.user!.username!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(

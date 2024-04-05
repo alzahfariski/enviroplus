@@ -27,8 +27,11 @@ class TImages {
   static const String productImage3 = "assets/images/products/product-3.png";
 
   //pollution
-  static const String pollution1 = "assets/images/pollution/buruk.png";
-  static const String pollution2 = "assets/images/pollution/baik.png";
+  static const String pollution1 = "assets/images/pollution/1.png";
+  static const String pollution2 = "assets/images/pollution/2.png";
+  static const String pollution3 = "assets/images/pollution/3.png";
+  static const String pollution4 = "assets/images/pollution/4.png";
+  static const String pollution5 = "assets/images/pollution/5.png";
 
   //Profile
   static const String user = "assets/images/content/user.png";

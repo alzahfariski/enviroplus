@@ -11,7 +11,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
+  flutter_circular_text: ^0.3.1
   flutter_native_splash: ^2.3.10
+  geocoding: ^3.0.0
+  geolocator: ^11.0.0
   get: ^4.6.6
   get_storage: ^2.1.1
   http: ^1.2.1
@@ -21,8 +24,10 @@ dependencies:
   lottie: ^3.1.0
   ming_cute_icons: ^0.0.4
   percent_indicator: ^4.2.3
+  permission_handler: ^11.3.1
   persistent_bottom_nav_bar: ^5.0.2
   provider: ^6.1.2
+  shared_preferences: ^2.2.2
   smooth_page_indicator: ^1.1.0
   url_launcher: ^6.2.5
 
@@ -42,6 +47,7 @@ flutter:
     - assets/images/products/
     - assets/images/mission/
     - assets/images/content/
+    - assets/images/badge/
     - assets/lottie/
   fonts:
     - family: Rubik

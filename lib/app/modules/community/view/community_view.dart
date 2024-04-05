@@ -1,13 +1,15 @@
 import 'package:enviroplus/app/modules/chat/view/chat_detail_view.dart';
+import 'package:enviroplus/app/modules/community/controller/community_controller.dart';
 import 'package:enviroplus/app/modules/community/view/ecoswap_detail_view.dart';
 import 'package:enviroplus/app/modules/community/view/ecoswap_post_view.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
-import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CommunityView extends StatelessWidget {
-  const CommunityView({super.key});
+  CommunityView({super.key});
+
+  final communityController = Get.put(CommunityController());
 
   @override
   Widget build(BuildContext context) {
@@ -15,98 +17,123 @@ class CommunityView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () => Get.to(() => const EcoSwapDeatilView()),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 10,
-                    ),
-                    width: double.infinity,
-                    height: 280,
-                    decoration: BoxDecoration(
-                      color: TColors.darkContainer,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ListTile(
-                          title: Text(
-                            'Komputer Gaming',
-                            style: Theme.of(context).textTheme.bodyMedium,
+            FutureBuilder(
+              future: communityController.getPost(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: communityController.post.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () => Get.to(() => const EcoSwapDeatilView()),
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 10,
                           ),
-                          subtitle: Text(
-                            'Rp. 2000.000.000',
-                            style: Theme.of(context).textTheme.labelLarge,
+                          width: double.infinity,
+                          height: 280,
+                          decoration: BoxDecoration(
+                            color: TColors.darkContainer,
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          trailing: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Post By',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                              ListTile(
+                                title: Text(
+                                  communityController.post[index].title!,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                subtitle: Text(
+                                  communityController.post[index].price
+                                      .toString(),
+                                  style: Theme.of(context).textTheme.labelLarge,
+                                ),
+                                trailing: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      'Post By',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
+                                    ),
+                                    Text(
+                                      communityController
+                                          .post[index].userPost!.username!,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    Text(
+                                      communityController.post[index].createdAt
+                                          .toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Text(
-                                'Alzah Fariski',
-                                style: Theme.of(context).textTheme.labelLarge,
-                              ),
-                              Text(
-                                '2 Mei 2024',
-                                style: Theme.of(context).textTheme.labelLarge,
+                              Column(
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      color: TColors.primary.withOpacity(0.8),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          communityController
+                                              .post[index].imageUrl!,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(
+                                        width: 240,
+                                        height: 58,
+                                        padding: const EdgeInsets.all(10),
+                                        child: Text(
+                                          communityController.post[index].body!,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () => Get.to(
+                                            () => const DetailChatView()),
+                                        icon: const Icon(
+                                          Icons.message,
+                                          color: TColors.primary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                         ),
-                        Column(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                color: TColors.primary.withOpacity(0.8),
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                    TImages.productImage1,
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                  width: 240,
-                                  height: 58,
-                                  padding: const EdgeInsets.all(10),
-                                  child: Text(
-                                    'Lorem ipsum is a dummy text without any sense asdwasdwasdwasdw. It is a sequence of Latin',
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () =>
-                                      Get.to(() => const DetailChatView()),
-                                  icon: const Icon(
-                                    Icons.message,
-                                    color: TColors.primary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                      );
+                    },
+                  );
+                }
+                return const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Center(
+                    child: CircularProgressIndicator(),
                   ),
                 );
               },

@@ -1,13 +1,15 @@
+import 'package:enviroplus/app/modules/badge/controller/badge_controller.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
-import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 
 class BadgeWidget extends StatelessWidget {
   const BadgeWidget({
     super.key,
     required this.title,
+    required this.badgeController,
   });
 
+  final BadgeController badgeController;
   final String title;
 
   @override
@@ -32,7 +34,7 @@ class BadgeWidget extends StatelessWidget {
               mainAxisSpacing: 10,
               childAspectRatio: 1.0,
             ),
-            itemCount: 4,
+            itemCount: badgeController.badge.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
@@ -40,12 +42,34 @@ class BadgeWidget extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Image.asset(
-                      TImages.pollution2,
-                      width: MediaQuery.of(context).size.width / 5,
+                    Stack(
+                      children: [
+                        Center(
+                          child: Image.asset(
+                            badgeController.badge[index].gambar,
+                            width: MediaQuery.of(context).size.width / 5,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Center(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 4,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/badge/gembok.png'),
+                              ),
+                              color: TColors.darkContainer.withOpacity(0.8),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
-                      'title',
+                      badgeController.badge[index].title,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),

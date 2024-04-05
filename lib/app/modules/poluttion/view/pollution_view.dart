@@ -39,7 +39,9 @@ class PollutionView extends StatelessWidget {
                 height: 20,
               ),
               const Image(
-                image: AssetImage(TImages.pollution2),
+                image: AssetImage(TImages.pollution1),
+                width: 200,
+                height: 200,
               ),
               const SizedBox(
                 height: 20,

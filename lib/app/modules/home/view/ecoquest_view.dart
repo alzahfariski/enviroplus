@@ -25,9 +25,9 @@ class EcoQuestView extends StatelessWidget {
       ),
       body: TabBarView(
         controller: ecoQuestController.controller,
-        children: const [
+        children: [
           MissionView(),
-          BadgeView(),
+          const BadgeView(),
         ],
       ),
     );

@@ -1,3 +1,5 @@
+import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
+import 'package:enviroplus/app/modules/home/controller/home_controller.dart';
 import 'package:enviroplus/app/modules/home/widget/polutan_widget.dart';
 import 'package:enviroplus/app/modules/leaderboard/view/leaderboard_view.dart';
 import 'package:enviroplus/app/modules/location/view/location_view.dart';
@@ -5,13 +7,17 @@ import 'package:enviroplus/app/modules/poluttion/view/pollution_view.dart';
 import 'package:enviroplus/utils/common_widgets/appbar.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:enviroplus/utils/constants/image_strings.dart';
+import 'package:enviroplus/utils/permissions/permission_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  HomeView({super.key});
+  final homeController = Get.put(HomeController());
+  final authenticationController = Get.put(AuthenticationController());
+  final permissionManager = Get.put(PermissionManager());
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +34,7 @@ class HomeView extends StatelessWidget {
                     'Welcome Back!',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  Text(
-                    'Hi! Alzah Fariski',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  Text('Hi! ${authenticationController.user?.username}'),
                 ],
               ),
               action: IconButton(
@@ -43,7 +46,7 @@ class HomeView extends StatelessWidget {
               height: 30,
             ),
             Text(
-              'Bengkulu',
+              permissionManager.address ?? "Belum tersedia",
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
@@ -54,7 +57,9 @@ class HomeView extends StatelessWidget {
               height: 20,
             ),
             const Image(
-              image: AssetImage(TImages.pollution2),
+              image: AssetImage(TImages.pollution1),
+              width: 200,
+              height: 200,
             ),
             const SizedBox(
               height: 10,
@@ -231,50 +236,83 @@ class HomeView extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 1.0,
-                crossAxisSpacing: 4.0,
-                childAspectRatio: 0.6,
-              ),
-              itemBuilder: (context, index) {
-                return Stack(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: TColors.primary,
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(10),
-                        ),
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/pollution/lead.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+            FutureBuilder(
+              future: homeController.getLeaderboard(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: homeController.leaderboard.length > 3
+                        ? 3
+                        : homeController.leaderboard.length,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 1.0,
+                      crossAxisSpacing: 4.0,
+                      childAspectRatio: 0.6,
                     ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        color: TColors.primary,
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Alzah Fariski\n87 Points',
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .copyWith(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ],
+                    itemBuilder: (context, index) {
+                      return Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: TColors.primary,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(10),
+                              ),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  homeController.leaderboard[index].avatarUrl!,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Container(
+                              color: TColors.primary,
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${homeController.leaderboard[index].username}',
+                                    textAlign: TextAlign.left,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge!
+                                        .copyWith(color: Colors.black),
+                                  ),
+                                  Text(
+                                    '${homeController.leaderboard[index].point} Poin',
+                                    textAlign: TextAlign.left,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge!
+                                        .copyWith(color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+                return const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               },
             ),

@@ -26,9 +26,9 @@ class EcoSwapView extends StatelessWidget {
       ),
       body: TabBarView(
         controller: ecoSwapController.controller,
-        children: const [
+        children: [
           CommunityView(),
-          ChatView(),
+          const ChatView(),
         ],
       ),
     );

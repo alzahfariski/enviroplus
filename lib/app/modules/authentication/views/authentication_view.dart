@@ -18,12 +18,40 @@ class AuthenticationView extends GetView<AuthenticationController> {
           () => Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: Image(
-                  image: AssetImage(logController.isLogin.value == true
-                      ? TImages.loginImage
-                      : TImages.registerImage),
+                padding: const EdgeInsets.only(top: 60, bottom: 20),
+                child: Text(
+                  logController.isLogin.value == true
+                      ? 'Selamat Datang'
+                      : 'Ayo Bergabung',
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
+              ),
+              Stack(
+                children: [
+                  Center(
+                    child: Container(
+                      width: 200,
+                      height: 240,
+                      decoration: const BoxDecoration(
+                        color: TColors.primary,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          topRight: Radius.circular(40),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -190,
+                    child: Image(
+                      image: AssetImage(logController.isLogin.value == true
+                          ? TImages.loginImage
+                          : TImages.registerImage),
+                      width: 400,
+                      height: 400,
+                    ),
+                  ),
+                ],
               ),
               Container(
                 decoration: const BoxDecoration(

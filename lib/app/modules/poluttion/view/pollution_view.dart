@@ -1,6 +1,6 @@
+import 'package:enviroplus/app/modules/home/controller/home_controller.dart';
 import 'package:enviroplus/app/modules/home/widget/polutan_widget.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
-import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -11,6 +11,7 @@ class PollutionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -28,7 +29,7 @@ class PollutionView extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Bengkulu',
+                homeController.address.toString(),
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
@@ -38,8 +39,8 @@ class PollutionView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Image(
-                image: AssetImage(TImages.pollution1),
+              Image(
+                image: AssetImage(homeController.pollutionImg.toString()),
                 width: 200,
                 height: 200,
               ),
@@ -57,7 +58,7 @@ class PollutionView extends StatelessWidget {
                     width: 10,
                   ),
                   Text(
-                    'Baik',
+                    homeController.air!.airPollution!.quality!,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                           color: TColors.primary,
                         ),
@@ -78,7 +79,7 @@ class PollutionView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Indeks Polusi : 1',
+                      'Indeks Polusi : ${homeController.air!.airPollution!.aqi!}',
                       style: Theme.of(context).textTheme.titleMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -87,10 +88,10 @@ class PollutionView extends StatelessWidget {
                       animation: true,
                       lineHeight: 10.0,
                       animationDuration: 2500,
-                      percent: 0.2,
+                      percent: homeController.pollutionPrencent.toDouble(),
                       barRadius: const Radius.circular(10),
-                      progressColor: TColors.accent,
-                      backgroundColor: TColors.primary,
+                      progressColor: homeController.colorStattus.value,
+                      backgroundColor: TColors.white.withOpacity(0.5),
                     ),
                   ],
                 ),
@@ -107,7 +108,7 @@ class PollutionView extends StatelessWidget {
               ),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 4,
+                itemCount: homeController.air!.recommendation!.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Container(
@@ -121,7 +122,7 @@ class PollutionView extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Silahkan Beraktivitas',
+                      homeController.air!.recommendation![index],
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -138,56 +139,62 @@ class PollutionView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Row(
+              Row(
                 children: [
                   PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
+                    angka: homeController.air!.airPollution!.components!.so2
+                        .toString(),
+                    nama: 'Dioksida Belerang',
                     zat: 'SO\u2082',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
+                    angka: homeController.air!.airPollution!.components!.no2
+                        .toString(),
+                    nama: 'Dioksida Nitrogen',
+                    zat: 'NO\u2082',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
+                    angka: homeController.air!.airPollution!.components!.pm10
+                        .toString(),
+                    nama: 'Partikel Udara 10',
+                    zat: 'PM\u2081\u2080',
                   ),
                 ],
               ),
               const SizedBox(
                 height: 20,
               ),
-              const Row(
+              Row(
                 children: [
                   PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
+                    angka: homeController.air!.airPollution!.components!.pm25
+                        .toString(),
+                    nama: 'Partikel Udara 2.5',
+                    zat: 'PM\u2082\u2085',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
+                    angka: homeController.air!.airPollution!.components!.o3
+                        .toString(),
+                    nama: 'Ozon',
+                    zat: 'O\u2083',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
+                    angka: homeController.air!.airPollution!.components!.co
+                        .toString(),
+                    nama: 'Karbon Monoksida',
+                    zat: 'CO',
                   ),
                 ],
               ),

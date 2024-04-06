@@ -6,8 +6,6 @@ import 'package:enviroplus/app/modules/location/view/location_view.dart';
 import 'package:enviroplus/app/modules/poluttion/view/pollution_view.dart';
 import 'package:enviroplus/utils/common_widgets/appbar.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
-import 'package:enviroplus/utils/constants/image_strings.dart';
-import 'package:enviroplus/utils/permissions/permission_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +15,6 @@ class HomeView extends StatelessWidget {
   HomeView({super.key});
   final homeController = Get.put(HomeController());
   final authenticationController = Get.put(AuthenticationController());
-  final permissionManager = Get.put(PermissionManager());
 
   @override
   Widget build(BuildContext context) {
@@ -45,167 +42,191 @@ class HomeView extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Text(
-              permissionManager.address ?? "Belum tersedia",
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              DateFormat.yMMMMEEEEd().format(DateTime.now()),
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Image(
-              image: AssetImage(TImages.pollution1),
-              width: 200,
-              height: 200,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Status Polusi',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  'Baik',
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: TColors.primary,
+            FutureBuilder(
+              future: homeController.getGeo(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Column(
+                    children: [
+                      Text(
+                        homeController.address.toString(),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: GridView.builder(
-                itemCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 4.0,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(
-                        width: 1,
-                        color: TColors.primary,
+                      Text(
+                        DateFormat.yMMMMEEEEd().format(DateTime.now()),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                    ),
-                    child: Text(
-                      'Silahkan Beraktivitas',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: TColors.darkContainer.withOpacity(0.8),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    'Indeks Polusi : 1',
-                    style: Theme.of(context).textTheme.titleMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                  LinearPercentIndicator(
-                    width: MediaQuery.of(context).size.width - 50,
-                    animation: true,
-                    lineHeight: 10.0,
-                    animationDuration: 2500,
-                    percent: 0.2,
-                    barRadius: const Radius.circular(10),
-                    progressColor: TColors.accent,
-                    backgroundColor: TColors.primary,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Konsentrasi polutan dalam μg/m3',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
-                children: [
-                  PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  PolutanWIdget(
-                    angka: '0.640',
-                    nama: 'Sulfur Duioksida',
-                    zat: 'SO\u2082',
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              onTap: () => Get.to(() => const PollutionView()),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Selengkapnya',
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: TColors.primary,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Image(
+                        image:
+                            AssetImage(homeController.pollutionImg.toString()),
+                        width: 200,
+                        height: 200,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Status Polusi',
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            homeController.air!.airPollution!.quality!,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(
+                                  color: TColors.primary,
+                                ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: ListView.builder(
+                          itemCount:
+                              homeController.air!.recommendation!.length > 2
+                                  ? 2
+                                  : homeController.air!.recommendation!.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  width: 1,
+                                  color: TColors.primary,
+                                ),
+                              ),
+                              child: Text(
+                                homeController.air!.recommendation![index],
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                textAlign: TextAlign.center,
+                              ),
+                            );
+                          },
                         ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Icon(
-                    Icons.arrow_circle_right_rounded,
-                    color: TColors.primary,
-                  ),
-                ],
-              ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 24),
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: TColors.darkContainer.withOpacity(0.8),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              'Indeks Polusi : ${homeController.air!.airPollution!.aqi}',
+                              style: Theme.of(context).textTheme.titleMedium,
+                              textAlign: TextAlign.center,
+                            ),
+                            LinearPercentIndicator(
+                              width: MediaQuery.of(context).size.width - 50,
+                              animation: true,
+                              lineHeight: 10.0,
+                              animationDuration: 2500,
+                              percent:
+                                  homeController.pollutionPrencent.toDouble(),
+                              barRadius: const Radius.circular(10),
+                              progressColor: homeController.colorStattus.value,
+                              backgroundColor: TColors.white.withOpacity(0.6),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Konsentrasi polutan dalam μg/m3',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Row(
+                          children: [
+                            PolutanWIdget(
+                              angka: homeController
+                                  .air!.airPollution!.components!.so2
+                                  .toString(),
+                              nama: 'Dioksida Belerang',
+                              zat: 'SO\u2082',
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            PolutanWIdget(
+                              angka: homeController
+                                  .air!.airPollution!.components!.no2
+                                  .toString(),
+                              nama: 'Dioksida Nitrogen',
+                              zat: 'NO\u2082',
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            PolutanWIdget(
+                              angka: homeController
+                                  .air!.airPollution!.components!.pm10
+                                  .toString(),
+                              nama: 'Particulate Matter',
+                              zat: 'PM\u2081\u2080',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () => Get.to(() => const PollutionView()),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Selengkapnya',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color: TColors.primary,
+                                  ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Icon(
+                              Icons.arrow_circle_right_rounded,
+                              color: TColors.primary,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
             ),
             const SizedBox(
               height: 20,

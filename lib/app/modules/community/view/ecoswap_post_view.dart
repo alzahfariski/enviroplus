@@ -9,8 +9,7 @@ class EcoSwapPostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EcoSwapPostController ecoSwapPostController =
-        Get.put(EcoSwapPostController());
+    final ecoSwapPostController = Get.put(EcoSwapPostController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -80,7 +79,9 @@ class EcoSwapPostView extends StatelessWidget {
               height: 24,
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                ecoSwapPostController.savePlace();
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: TColors.primary,
               ),

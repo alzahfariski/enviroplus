@@ -27,7 +27,7 @@ class AirPollution {
 
   AirPollution.fromJson(Map<String, dynamic> json) {
     coord = Coord.fromJson(json['coord']);
-    aqi = json['aqi'];
+    aqi = int.parse(json['aqi'].toString());
     quality = json['quality'];
     components = Components.fromJson(json['components']);
   }
@@ -49,8 +49,8 @@ class Coord {
   Coord({this.lon, this.lat});
 
   Coord.fromJson(Map<String, dynamic> json) {
-    lon = json['lon'];
-    lat = json['lat'];
+    lon = double.parse(json['lon'].toString());
+    lat = double.parse(json['lat'].toString());
   }
 
   Map<String, dynamic> toJson() {
@@ -82,14 +82,14 @@ class Components {
       this.nh3});
 
   Components.fromJson(Map<String, dynamic> json) {
-    co = json['co'];
-    no = json['no'];
-    no2 = json['no2'];
-    o3 = json['o3'];
-    so2 = json['so2'];
-    pm25 = json['pm2_5'];
-    pm10 = json['pm10'];
-    nh3 = json['nh3'];
+    co = double.parse(json['co'].toString());
+    no = double.parse(json['no'].toString());
+    no2 = double.parse(json['no2'].toString());
+    o3 = double.parse(json['o3'].toString());
+    so2 = double.parse(json['so2'].toString());
+    pm25 = double.parse(json['pm2_5'].toString());
+    pm10 = double.parse(json['pm10'].toString());
+    nh3 = double.parse(json['nh3'].toString());
   }
 
   Map<String, dynamic> toJson() {

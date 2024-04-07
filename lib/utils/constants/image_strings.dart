@@ -21,11 +21,6 @@ class TImages {
   static const String verifyImage =
       "assets/images/authentication_image/verify.png";
 
-  // -- Products
-  static const String productImage1 = "assets/images/products/product-1.png";
-  static const String productImage2 = "assets/images/products/product-2.png";
-  static const String productImage3 = "assets/images/products/product-3.png";
-
   //pollution
   static const String pollution1 = "assets/images/pollution/1.png";
   static const String pollution2 = "assets/images/pollution/2.png";
@@ -33,7 +28,6 @@ class TImages {
   static const String pollution4 = "assets/images/pollution/4.png";
   static const String pollution5 = "assets/images/pollution/5.png";
 
-  //Profile
-  static const String user = "assets/images/content/user.png";
+  //leaderboard
   static const String ranking = "assets/images/content/ranking.png";
 }

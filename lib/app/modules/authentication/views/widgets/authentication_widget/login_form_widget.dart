@@ -17,7 +17,7 @@ class LoginFormWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Form(
-        key: signInController.signUpFormKey,
+        key: signInController.signInFormKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [

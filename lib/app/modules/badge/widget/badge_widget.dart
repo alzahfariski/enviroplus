@@ -1,3 +1,4 @@
+import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
 import 'package:enviroplus/app/modules/badge/controller/badge_controller.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,16 @@ class BadgeWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.badgeController,
+    required this.authenticationController,
   });
 
   final BadgeController badgeController;
   final String title;
+  final AuthenticationController authenticationController;
 
   @override
   Widget build(BuildContext context) {
+    int a = authenticationController.user!.point!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -52,20 +56,23 @@ class BadgeWidget extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Center(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width / 4,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: const DecorationImage(
-                                image: AssetImage(
-                                    'assets/images/badge/gembok.png'),
-                              ),
-                              color: TColors.darkContainer.withOpacity(0.8),
-                            ),
-                          ),
-                        ),
+                        a < badgeController.badge[index].poinMin
+                            ? Center(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width / 4,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: const DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/badge/gembok.png'),
+                                    ),
+                                    color:
+                                        TColors.darkContainer.withOpacity(0.8),
+                                  ),
+                                ),
+                              )
+                            : const SizedBox(),
                       ],
                     ),
                     Text(

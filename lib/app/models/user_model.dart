@@ -6,6 +6,7 @@ class UserModel {
   String? avatarUrl;
   String? work;
   String? token;
+  int? point;
 
   UserModel({
     this.id,
@@ -15,6 +16,7 @@ class UserModel {
     this.avatarUrl,
     this.work,
     this.token,
+    this.point,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +27,7 @@ class UserModel {
     avatarUrl = json['avatarUrl'];
     work = json['work'];
     token = json['token'];
+    point = int.parse(json['point'].toString());
   }
 
   Map<String, dynamic> toJson() {
@@ -36,6 +39,7 @@ class UserModel {
       "avatarUrl": avatarUrl,
       "work": work,
       "token": token,
+      "point": point,
     };
   }
 }

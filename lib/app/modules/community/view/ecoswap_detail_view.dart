@@ -1,10 +1,17 @@
+import 'package:enviroplus/app/modules/community/controller/community_controller.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
-import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EcoSwapDeatilView extends StatelessWidget {
-  const EcoSwapDeatilView({super.key});
+  const EcoSwapDeatilView({
+    super.key,
+    required this.index,
+    required this.communityController,
+  });
+
+  final int index;
+  final CommunityController communityController;
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +26,17 @@ class EcoSwapDeatilView extends StatelessWidget {
             color: TColors.primary,
           ),
         ),
-        title: const Text('Komputer Gaming'),
+        title: Text(communityController.post[index].title!),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
               width: double.infinity,
-              child: Image.asset(
-                TImages.productImage1,
+              child: Image.network(
+                communityController.post[index].imageUrl!,
+                width: 300,
+                height: 300,
                 fit: BoxFit.cover,
               ),
             ),
@@ -41,7 +50,7 @@ class EcoSwapDeatilView extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Komputer Gaming',
+                        communityController.post[index].title!,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(
@@ -59,7 +68,7 @@ class EcoSwapDeatilView extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        'Rp 2.000.000',
+                        communityController.post[index].price!.toString(),
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
@@ -80,7 +89,7 @@ class EcoSwapDeatilView extends StatelessWidget {
                   ),
                   Text(
                     textAlign: TextAlign.justify,
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+                    communityController.post[index].body!,
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   const SizedBox(
@@ -95,13 +104,12 @@ class EcoSwapDeatilView extends StatelessWidget {
                     ],
                   ),
                   ListTile(
-                    leading: const CircleAvatar(),
                     title: Text(
-                      'Alzah Fariski',
+                      communityController.post[index].userPost!.username!,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     subtitle: Text(
-                      '12 Maret 2024',
+                      communityController.post[index].createdAt.toString(),
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
@@ -113,7 +121,12 @@ class EcoSwapDeatilView extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          communityController.handleNewChat(
+            communityController.post[index].userPost!.id!,
+            communityController.post[index].title!,
+          );
+        },
         child: Container(
           padding: const EdgeInsets.all(16),
           margin: const EdgeInsets.all(16),

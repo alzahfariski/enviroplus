@@ -69,17 +69,18 @@ class HomeController extends GetxController {
       position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
 
-      lat.value = position!.latitude;
-      lng.value = position!.longitude;
-
-      air = await AirService().getAir();
-      findStatus(air!.airPollution!.aqi!);
-
       if (position != null) {
+        lat.value = position!.latitude;
+        lng.value = position!.longitude;
+
+        air = await AirService()
+            .getAir(lat.value.toString(), lng.value.toString());
+        findStatus(air!.airPollution!.aqi!);
+
         await getAddressFromLatLng(position!.latitude, position!.longitude);
       }
     } catch (e) {
-      throw Exception(e);
+      throw Exception('Error getting geo: $e');
     }
   }
 
@@ -89,7 +90,7 @@ class HomeController extends GetxController {
           await placemarkFromCoordinates(latitude, longitude);
       if (placemarks.isNotEmpty) {
         Placemark place = placemarks[0];
-        address.value = "${place.locality}";
+        address.value = "${place.administrativeArea}";
         update();
       }
     } catch (e) {

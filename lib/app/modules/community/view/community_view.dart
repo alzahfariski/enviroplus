@@ -1,4 +1,3 @@
-import 'package:enviroplus/app/modules/chat/view/chat_detail_view.dart';
 import 'package:enviroplus/app/modules/community/controller/community_controller.dart';
 import 'package:enviroplus/app/modules/community/view/ecoswap_detail_view.dart';
 import 'package:enviroplus/app/modules/community/view/ecoswap_post_view.dart';
@@ -27,7 +26,10 @@ class CommunityView extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: () => Get.to(() => const EcoSwapDeatilView()),
+                        onTap: () => Get.to(() => EcoSwapDeatilView(
+                              index: index,
+                              communityController: communityController,
+                            )),
                         child: Container(
                           margin: const EdgeInsets.symmetric(
                             horizontal: 24,
@@ -46,11 +48,12 @@ class CommunityView extends StatelessWidget {
                                 title: Text(
                                   communityController.post[index].title!,
                                   style: Theme.of(context).textTheme.bodyMedium,
+                                  maxLines: 1,
                                 ),
                                 subtitle: Text(
-                                  communityController.post[index].price
-                                      .toString(),
+                                  "Rp. ${communityController.post[index].price}",
                                   style: Theme.of(context).textTheme.labelLarge,
+                                  maxLines: 1,
                                 ),
                                 trailing: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -94,32 +97,18 @@ class CommunityView extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Container(
-                                        width: 240,
-                                        height: 58,
-                                        padding: const EdgeInsets.all(10),
-                                        child: Text(
-                                          communityController.post[index].body!,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () => Get.to(
-                                            () => const DetailChatView()),
-                                        icon: const Icon(
-                                          Icons.message,
-                                          color: TColors.primary,
-                                        ),
-                                      ),
-                                    ],
+                                  Container(
+                                    width: double.infinity,
+                                    height: 58,
+                                    padding: const EdgeInsets.all(10),
+                                    child: Text(
+                                      communityController.post[index].body!,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    ),
                                   ),
                                 ],
                               ),

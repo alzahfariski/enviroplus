@@ -1,3 +1,4 @@
+import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
 import 'package:enviroplus/app/modules/badge/controller/badge_controller.dart';
 import 'package:enviroplus/app/modules/badge/widget/badge_widget.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
@@ -10,6 +11,7 @@ class BadgeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final badgeController = Get.put(BadgeController());
+    final authenticationController = Get.put(AuthenticationController());
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -23,7 +25,7 @@ class BadgeView extends StatelessWidget {
                     ),
               ),
               Text(
-                '0',
+                authenticationController.user!.point.toString(),
                 style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                       color: TColors.primary,
                       fontSize: 64,
@@ -33,6 +35,7 @@ class BadgeView extends StatelessWidget {
                 height: 10,
               ),
               BadgeWidget(
+                authenticationController: authenticationController,
                 badgeController: badgeController,
                 title: 'Penghargaan',
               ),

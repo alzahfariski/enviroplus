@@ -1,11 +1,18 @@
+import 'package:enviroplus/app/modules/chat/controller/chat_controller.dart';
 import 'package:enviroplus/app/modules/chat/widget/chat_bubble.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
-import 'package:enviroplus/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailChatView extends StatelessWidget {
-  const DetailChatView({super.key});
+  const DetailChatView({
+    super.key,
+    required this.chatController,
+    required this.index,
+  });
+
+  final ChatController chatController;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +28,8 @@ class DetailChatView extends StatelessWidget {
         centerTitle: false,
         title: Row(
           children: [
-            Image.asset(
-              TImages.user,
+            Image.network(
+              chatController.chat[index].receiver!.avatarUrl!,
               width: 32,
               height: 32,
               fit: BoxFit.cover,
@@ -31,7 +38,7 @@ class DetailChatView extends StatelessWidget {
               width: 12,
             ),
             Text(
-              'Alzah Fariski',
+              chatController.chat[index].receiver!.username!,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: TColors.primary,
                   ),
@@ -39,133 +46,100 @@ class DetailChatView extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 30,
-        ),
-        children: const [
-          ChatBubble(
-            isSeder: true,
-            hasProduct: true,
-            messege: 'Hi!, Alzah Fariski',
-          ),
-          ChatBubble(
-            isSeder: false,
-            messege:
-                'Hi!, Pembeli apakah kamu mau beli apa hanya tanya tanya saja ?',
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 225,
-              height: 74,
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: const Color(0xff293038),
-                border: Border.all(
-                  color: TColors.white,
+      body: FutureBuilder(
+        future: chatController.getChatRoom(chatController.chat[index].sId!),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Stack(
+              children: [
+                ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  itemCount: chatController.chatData?.messages?.length,
+                  itemBuilder: (context, index) {
+                    return ChatBubble(
+                      isSeder:
+                          chatController.chatData!.messages![index].isSender!,
+                      messege:
+                          chatController.chatData!.messages![index].content!,
+                    );
+                  },
                 ),
-              ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      TImages.productImage1,
-                      width: 64,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                Positioned(
+                  // Position the input field at the bottom
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(
+                    margin: const EdgeInsets.all(20.0),
+                    child: Row(
                       children: [
-                        Text(
-                          'Komputer Gaming',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
+                        Expanded(
+                          child: Container(
+                            height: 45.0,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                              vertical: 12.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: TColors.primary,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: TextFormField(
+                                controller: chatController.content,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      color: TColors.black,
+                                    ),
+                                decoration: InputDecoration.collapsed(
+                                  hintText: 'Tulis Pesan ...',
+                                  hintStyle: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        color: TColors.black,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        Text(
-                          'Rp 2.000.000',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: TColors.primary,
-                                    fontSize: 12,
-                                  ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: TColors.primary,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10.0,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          onPressed: () {
+                            chatController.handleNewChat(
+                              chatController.chat[index].receiver!.id!,
+                            );
+                          },
+                          child: const Icon(
+                            Icons.send,
+                            color: TColors.black,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.close,
-                      color: TColors.primary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 45,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    decoration: BoxDecoration(
-                      color: TColors.primary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: TextFormField(
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Tulis Pesan ...',
-                          hintStyle:
-                              Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: TColors.black,
-                                  ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: TColors.primary,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  onPressed: () {},
-                  child: const Icon(
-                    Icons.send,
-                    color: TColors.black,
-                  ),
                 ),
               ],
-            ),
-          ],
-        ),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }

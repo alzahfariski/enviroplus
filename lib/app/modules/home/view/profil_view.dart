@@ -37,8 +37,12 @@ class ProfilView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(60),
                             image: DecorationImage(
                               image: NetworkImage(
-                                authenticationController.user!.avatarUrl
-                                    .toString(),
+                                authenticationController.user?.avatarUrl
+                                            .toString() !=
+                                        null
+                                    ? authenticationController.user!.avatarUrl
+                                        .toString()
+                                    : 'https://firebasestorage.googleapis.com/v0/b/enviro-db8b4.appspot.com/o/assets%2Fdefault-avatar.png?alt=media&token=f45d5e8d-eab3-4c92-bec8-b771ff6cc26d',
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -88,36 +92,61 @@ class ProfilView extends StatelessWidget {
               ),
               TextFieldProfil(
                 title: 'Nama',
-                value: authenticationController.user!.username.toString(),
+                value:
+                    authenticationController.user?.username.toString() != null
+                        ? authenticationController.user!.username.toString()
+                        : 'Kesalahan',
               ),
               TextFieldProfil(
                 title: 'Email',
-                value: authenticationController.user!.email.toString(),
+                value: authenticationController.user?.email.toString() != null
+                    ? authenticationController.user!.email.toString()
+                    : 'Kesalahan',
               ),
               TextFieldProfil(
                 title: 'Pekerjaan',
-                value: authenticationController.user!.work.toString(),
+                value: authenticationController.user?.work.toString() != null
+                    ? authenticationController.user!.work.toString()
+                    : 'Kesalahan',
               ),
               const SizedBox(
                 height: 20,
+              ),
+              ElevatedButton.icon(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: TColors.primary,
+                ),
+                icon: const Icon(
+                  Icons.save,
+                  color: TColors.black,
+                ),
+                label: Text(
+                  'Simpan',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: TColors.black,
+                      ),
+                ),
               ),
             ],
           ),
         ),
       ),
       floatingActionButton: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: () {
+          authenticationController.logout();
+        },
         style: ElevatedButton.styleFrom(
-          backgroundColor: TColors.primary,
+          backgroundColor: Colors.red,
         ),
         icon: const Icon(
-          Icons.save,
-          color: TColors.black,
+          Icons.logout_rounded,
+          color: TColors.white,
         ),
         label: Text(
-          'Simpan',
+          'Keluar',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: TColors.black,
+                color: TColors.white,
               ),
         ),
       ),

@@ -134,7 +134,7 @@ class LeaderboardView extends StatelessWidget {
                 ),
               ),
               Text(
-                'Poin',
+                '${authenticationController.user?.point} Poin',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: TColors.black,
                     ),

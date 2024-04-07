@@ -1,11 +1,45 @@
 import 'dart:convert';
 
+import 'package:enviroplus/app/models/new_post_model.dart';
 import 'package:enviroplus/app/models/post_model.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class PostService {
   String baseUrl = "https://enviro-api-nu.vercel.app/api/v1";
+
+  Future<NewPostModel> newPost({
+    String? title,
+    String? price,
+    String? bodys,
+    String? addres,
+  }) async {
+    var url = '$baseUrl/post';
+    final box = GetStorage();
+    String token = box.read('usertoken');
+    var headers = {'Authorization': token};
+    var body = jsonEncode({
+      'title': title,
+      'price': price,
+      'body': bodys,
+      'addres': addres,
+    });
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)['data'];
+      NewPostModel newPost = NewPostModel.fromJson(data['post']);
+
+      return newPost;
+    } else {
+      throw Exception('Gagal Post');
+    }
+  }
 
   Future<List<PostModel>> getPost() async {
     var url = '$baseUrl/post';

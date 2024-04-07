@@ -31,7 +31,9 @@ class MissionView extends StatelessWidget {
                   int num = index + 1;
                   return GestureDetector(
                     onTap: () {
-                      Get.to(() => const MissionDetailView());
+                      Get.to(() => MissionDetailView(
+                            id: missionController.level[index].id!,
+                          ));
                     },
                     child: Container(
                       decoration: BoxDecoration(

@@ -1,5 +1,7 @@
 import 'package:enviroplus/app/models/post_model.dart';
+import 'package:enviroplus/app/services/chat_new_service.dart';
 import 'package:enviroplus/app/services/post_service.dart';
+import 'package:enviroplus/utils/loaders/loaders.dart';
 import 'package:get/get.dart';
 
 class CommunityController extends GetxController {
@@ -26,6 +28,31 @@ class CommunityController extends GetxController {
       _posts = posts;
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  Future<bool> newChat({
+    required String content,
+    required String id,
+  }) async {
+    try {
+      await NewChatService().newChat(content, id);
+
+      update();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void handleNewChat(String id, String nama) async {
+    try {
+      await newChat(content: 'Saya tertarik dengan produk $nama', id: id);
+      Get.back();
+      TLoaders.successSnackBar(
+          title: 'Berhasil!', message: 'Silahkan cek di Chat');
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'ada kesalahan !', message: e.toString());
     }
   }
 }

@@ -1,6 +1,8 @@
 import 'package:enviroplus/app/models/user_model.dart';
+import 'package:enviroplus/app/modules/authentication/views/authentication_view.dart';
 import 'package:enviroplus/app/modules/home/navbar/navigation_bottom.dart';
 import 'package:enviroplus/app/services/auth_service.dart';
+import 'package:enviroplus/utils/helpers/network_manager.dart';
 import 'package:enviroplus/utils/loaders/loaders.dart';
 import 'package:enviroplus/utils/popup/full_screen_loader.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,16 @@ class AuthenticationController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    email.dispose();
+    username.dispose();
+    password.dispose();
+    super.onClose();
+  }
+
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
 
   UserModel? _user;
 
@@ -34,9 +45,12 @@ class AuthenticationController extends GetxController {
   Future<void> autoLogin() async {
     final box = GetStorage();
     final token = box.read('usertoken');
-    if (token != null) {
-      _user = await AuthService().fetchData(token);
-      update();
+    final isConnected = await NetworkManager.instance.isConnected();
+    if (!isConnected) {
+      if (token != null) {
+        _user = await AuthService().fetchData(token);
+        update();
+      }
     }
   }
 
@@ -113,7 +127,7 @@ class AuthenticationController extends GetxController {
     try {
       TFullScreenLoader.openLoadingDialog(
           'we are processing your information', 'assets/lottie/loader.json');
-      if (!signUpFormKey.currentState!.validate()) {
+      if (!signInFormKey.currentState!.validate()) {
         TFullScreenLoader.stopLoading();
         return;
       }
@@ -138,5 +152,20 @@ class AuthenticationController extends GetxController {
       TLoaders.errorSnackBar(title: 'oh snap!', message: e.toString());
       TFullScreenLoader.stopLoading();
     }
+  }
+
+  void refreshFormKeys() {
+    signUpFormKey = GlobalKey<FormState>();
+    signInFormKey = GlobalKey<FormState>();
+  }
+
+  void logout() {
+    final storage = GetStorage();
+    storage.erase();
+    refreshFormKeys();
+    email.clear();
+    username.clear();
+    password.clear();
+    Get.offAll(() => AuthenticationView()); // Membuka kembali aplikasi
   }
 }

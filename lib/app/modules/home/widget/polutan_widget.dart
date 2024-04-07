@@ -43,7 +43,7 @@ class PolutanWIdget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: TColors.dark,
-                    fontSize: 16,
+                    fontSize: 12,
                   ),
             ),
           ],

@@ -31,6 +31,7 @@ class PollutionView extends StatelessWidget {
               Text(
                 homeController.address.toString(),
                 style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
               ),
               Text(
                 DateFormat.yMMMMEEEEd().format(DateTime.now()),
@@ -200,69 +201,6 @@ class PollutionView extends StatelessWidget {
               ),
               const SizedBox(
                 height: 20,
-              ),
-              Text(
-                'Ramalan Polusi Udara',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    width: double.infinity,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: TColors.darkContainer.withOpacity(0.8),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Sen',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Indeks Polusi',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            LinearPercentIndicator(
-                              width: MediaQuery.of(context).size.width - 160,
-                              animation: true,
-                              leading: Text(
-                                '1',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                              trailing: Text(
-                                '5',
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                              lineHeight: 10.0,
-                              animationDuration: 2500,
-                              percent: 0.2,
-                              barRadius: const Radius.circular(10),
-                              progressColor: TColors.accent,
-                              backgroundColor: TColors.primary,
-                            ),
-                            Text(
-                              'Status Polusi : Baik',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
               ),
             ],
           ),

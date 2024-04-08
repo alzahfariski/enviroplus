@@ -90,42 +90,49 @@ class ProfilView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              TextFieldProfil(
-                title: 'Nama',
-                value:
-                    authenticationController.user?.username.toString() != null
-                        ? authenticationController.user!.username.toString()
-                        : 'Kesalahan',
-              ),
-              TextFieldProfil(
-                title: 'Email',
-                value: authenticationController.user?.email.toString() != null
-                    ? authenticationController.user!.email.toString()
-                    : 'Kesalahan',
-              ),
-              TextFieldProfil(
-                title: 'Pekerjaan',
-                value: authenticationController.user?.work.toString() != null
-                    ? authenticationController.user!.work.toString()
-                    : 'Kesalahan',
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton.icon(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: TColors.primary,
-                ),
-                icon: const Icon(
-                  Icons.save,
-                  color: TColors.black,
-                ),
-                label: Text(
-                  'Simpan',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              Form(
+                key: authenticationController.updateUserProfilFormKey,
+                child: Column(
+                  children: [
+                    TextFieldProfil(
+                      controller: authenticationController.username,
+                      title: 'Nama',
+                      value: authenticationController.user?.username
+                                  .toString() !=
+                              null
+                          ? authenticationController.user!.username.toString()
+                          : 'Kesalahan',
+                    ),
+                    TextFieldProfil(
+                      controller: authenticationController.work,
+                      title: 'Pekerjaan',
+                      value:
+                          authenticationController.user?.work.toString() != null
+                              ? authenticationController.user!.work.toString()
+                              : 'Kesalahan',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        authenticationController.handleUpdate();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: TColors.primary,
+                      ),
+                      icon: const Icon(
+                        Icons.save,
                         color: TColors.black,
                       ),
+                      label: Text(
+                        'Simpan',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: TColors.black,
+                            ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

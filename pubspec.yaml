@@ -42,6 +42,7 @@ flutter:
   assets:
     - assets/logos/
     - assets/images/
+    - assets/images/animations/
     - assets/images/authentication_image/
     - assets/images/badge/
     - assets/images/content/

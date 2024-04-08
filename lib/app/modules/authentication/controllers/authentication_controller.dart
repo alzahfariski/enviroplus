@@ -2,6 +2,7 @@ import 'package:enviroplus/app/models/user_model.dart';
 import 'package:enviroplus/app/modules/authentication/views/authentication_view.dart';
 import 'package:enviroplus/app/modules/home/navbar/navigation_bottom.dart';
 import 'package:enviroplus/app/services/auth_service.dart';
+import 'package:enviroplus/app/services/user_update_service.dart';
 import 'package:enviroplus/utils/helpers/network_manager.dart';
 import 'package:enviroplus/utils/loaders/loaders.dart';
 import 'package:enviroplus/utils/popup/full_screen_loader.dart';
@@ -18,12 +19,14 @@ class AuthenticationController extends GetxController {
   late TextEditingController email;
   late TextEditingController username;
   late TextEditingController password;
+  late TextEditingController work;
 
   @override
   void onInit() async {
     email = TextEditingController();
     username = TextEditingController();
     password = TextEditingController();
+    work = TextEditingController();
     super.onInit();
   }
 
@@ -32,11 +35,13 @@ class AuthenticationController extends GetxController {
     email.dispose();
     username.dispose();
     password.dispose();
+    work.dispose();
     super.onClose();
   }
 
   GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> signInFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> updateUserProfilFormKey = GlobalKey<FormState>();
 
   UserModel? _user;
 
@@ -66,6 +71,8 @@ class AuthenticationController extends GetxController {
         password: password,
       );
       _user = await AuthService().fetchData(user.token!);
+
+      work.text = user.work!;
 
       update();
       return true;
@@ -116,6 +123,8 @@ class AuthenticationController extends GetxController {
       );
       _user = await AuthService().fetchData(user.token!);
 
+      work.text = user.work!;
+
       update();
       return true;
     } catch (e) {
@@ -157,6 +166,7 @@ class AuthenticationController extends GetxController {
   void refreshFormKeys() {
     signUpFormKey = GlobalKey<FormState>();
     signInFormKey = GlobalKey<FormState>();
+    updateUserProfilFormKey = GlobalKey<FormState>();
   }
 
   void logout() {
@@ -167,5 +177,52 @@ class AuthenticationController extends GetxController {
     username.clear();
     password.clear();
     Get.offAll(() => AuthenticationView()); // Membuka kembali aplikasi
+  }
+
+  Future<bool> updateUserProfil({
+    String? username,
+    String? email,
+    String? work,
+  }) async {
+    try {
+      await UserUpdateService().updateUser(
+        id: user!.id!,
+        username: username.toString(),
+        email: email.toString(),
+        work: work.toString(),
+      );
+
+      update();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void handleUpdate() async {
+    try {
+      TFullScreenLoader.openLoadingDialog(
+          'we are processing your information', 'assets/lottie/loader.json');
+      if (!updateUserProfilFormKey.currentState!.validate()) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+      if (await updateUserProfil(
+        username: username.text,
+        email: email.text,
+        work: work.text,
+      )) {
+        TFullScreenLoader.stopLoading();
+        TLoaders.successSnackBar(title: 'selamat', message: 'Selamat');
+
+        Get.forceAppUpdate();
+      } else {
+        TLoaders.errorSnackBar(title: 'oh snap!', message: 'Tidak berhasil');
+        TFullScreenLoader.stopLoading();
+      }
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'oh snap!', message: e.toString());
+      TFullScreenLoader.stopLoading();
+    }
   }
 }

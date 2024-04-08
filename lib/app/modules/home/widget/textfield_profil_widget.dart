@@ -6,26 +6,21 @@ class TextFieldProfil extends StatelessWidget {
     super.key,
     required this.title,
     required this.value,
+    required this.controller,
   });
 
   final String title;
   final String value;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: TColors.white,
-              ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        TextField(
+        TextFormField(
+          controller: controller,
+          expands: false,
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
@@ -41,8 +36,8 @@ class TextFieldProfil extends StatelessWidget {
                 color: TColors.primary,
               ),
             ),
-            hintText: value, // Menggunakan labelText alih-alih label
-            hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            labelText: title, // Menggunakan labelText alih-alih label
+            labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: TColors.white,
                 ),
           ),

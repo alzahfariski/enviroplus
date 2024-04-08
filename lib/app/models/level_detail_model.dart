@@ -55,4 +55,10 @@ class Questions {
       '_id': sId,
     };
   }
+
+  List<String> get shuffledAnswers {
+    final shuffledList = List.of(answers!);
+    shuffledList.shuffle();
+    return shuffledList;
+  }
 }

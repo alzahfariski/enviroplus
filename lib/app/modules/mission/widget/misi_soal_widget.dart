@@ -39,7 +39,7 @@ class MisiSoal extends StatelessWidget {
               missionController: missionController,
               answer: answer,
               function: () {
-                missionController.nextQues();
+                missionController.nextQues(answer);
               },
             );
           }),

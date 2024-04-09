@@ -1,3 +1,4 @@
+import 'package:enviroplus/app/modules/mission/controller/mission_controller.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +7,12 @@ class AnswerWidget extends StatelessWidget {
     super.key,
     required this.answer,
     required this.function,
+    required this.missionController,
   });
 
   final String answer;
   final void Function() function;
+  final MissionController missionController;
 
   @override
   Widget build(BuildContext context) {

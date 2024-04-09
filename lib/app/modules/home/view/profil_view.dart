@@ -1,5 +1,4 @@
 import 'package:enviroplus/app/modules/authentication/controllers/authentication_controller.dart';
-import 'package:enviroplus/app/modules/home/view/change_profil_option/change_profile_modal_bottom_sheet.dart';
 import 'package:enviroplus/app/modules/home/widget/textfield_profil_widget.dart';
 import 'package:enviroplus/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ class ProfilView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final authenticationController = Get.put(AuthenticationController());
     return Scaffold(
       body: SingleChildScrollView(
@@ -50,28 +48,6 @@ class ProfilView extends StatelessWidget {
                               width: 4,
                               strokeAlign: BorderSide.strokeAlignOutside,
                               color: TColors.white,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: () =>
-                                ChangeProfilScreen.buildShowModalBottomSheet(
-                                    context, size),
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Icon(
-                                Icons.create,
-                                size: 18,
-                                color: Colors.black,
-                              ),
                             ),
                           ),
                         ),
@@ -141,7 +117,38 @@ class ProfilView extends StatelessWidget {
       ),
       floatingActionButton: ElevatedButton.icon(
         onPressed: () {
-          authenticationController.logout();
+          Get.defaultDialog(
+            title: 'Keluar',
+            middleText: 'Anda yakin mau keluar ?',
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text('Batal'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  authenticationController.logout();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: const BorderSide(
+                    color: Colors.red,
+                  ),
+                  elevation: 0,
+                  padding: const EdgeInsets.all(8),
+                ),
+                child: const Text(
+                  'Keluar',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.red,

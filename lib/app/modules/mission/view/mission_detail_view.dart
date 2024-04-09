@@ -26,6 +26,7 @@ class MissionDetailView extends StatelessWidget {
                 leading: IconButton(
                   onPressed: () {
                     Get.back();
+                    missionController.isNext.value = true;
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,
@@ -48,6 +49,7 @@ class MissionDetailView extends StatelessWidget {
                   backgroundColor: TColors.primary,
                 ),
                 onPressed: () {
+                  missionController.isPage.value = 0;
                   missionController.isNext.toggle();
                 },
                 icon: Icon(

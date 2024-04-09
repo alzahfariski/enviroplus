@@ -10,11 +10,16 @@ class MissionController extends GetxController {
   static MissionController get instance => Get.find();
 
   RxBool isNext = true.obs;
+  RxInt isPage = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     getLevel();
+  }
+
+  void nextQues() {
+    isPage++;
   }
 
   List<LevelModel> _levels = [];

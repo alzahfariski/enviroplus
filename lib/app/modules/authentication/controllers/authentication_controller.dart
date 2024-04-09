@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:enviroplus/app/models/user_model.dart';
 import 'package:enviroplus/app/modules/authentication/views/authentication_view.dart';
 import 'package:enviroplus/app/modules/home/navbar/navigation_bottom.dart';
@@ -183,6 +185,7 @@ class AuthenticationController extends GetxController {
     String? username,
     String? email,
     String? work,
+    File? image,
   }) async {
     try {
       await UserUpdateService().updateUser(
@@ -190,6 +193,7 @@ class AuthenticationController extends GetxController {
         username: username.toString(),
         email: email.toString(),
         work: work.toString(),
+        image: image,
       );
 
       update();
@@ -199,6 +203,8 @@ class AuthenticationController extends GetxController {
     }
   }
 
+  File? selectedImage;
+
   void handleUpdate() async {
     try {
       TFullScreenLoader.openLoadingDialog(
@@ -207,10 +213,12 @@ class AuthenticationController extends GetxController {
         TFullScreenLoader.stopLoading();
         return;
       }
+
       if (await updateUserProfil(
         username: username.text,
         email: email.text,
         work: work.text,
+        image: selectedImage,
       )) {
         TFullScreenLoader.stopLoading();
         TLoaders.successSnackBar(title: 'selamat', message: 'Selamat');

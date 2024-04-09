@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:enviroplus/app/models/user_model.dart';
 import 'package:get_storage/get_storage.dart';
@@ -11,6 +12,7 @@ class UserUpdateService {
     String? username,
     String? email,
     String? work,
+    File? image,
     required String id,
   }) async {
     var url = '$baseUrl/user/$id/update';
@@ -20,16 +22,24 @@ class UserUpdateService {
       'Content-Type': 'application/json',
       'Authorization': token,
     };
-    var body = jsonEncode({
-      'work': work,
-      'username': username,
-    });
+    var request = http.MultipartRequest('PATCH', Uri.parse(url));
+    request.headers.addAll(headers);
+    request.fields['username'] = username ?? '';
+    request.fields['email'] = email ?? '';
+    request.fields['work'] = work ?? '';
 
-    var response = await http.patch(
-      Uri.parse(url),
-      headers: headers,
-      body: body,
-    );
+    if (image != null) {
+      var fileStream = http.ByteStream(image.openRead());
+      var length = await image.length();
+      var multipartFile = http.MultipartFile(
+        'avatar',
+        fileStream,
+        length,
+        filename: image.path.split('/').last,
+      );
+      request.files.add(multipartFile);
+    }
+    var response = await http.Response.fromStream(await request.send());
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body)['data'];

@@ -26,6 +26,7 @@ class EcoSwapPostView extends StatelessWidget {
         child: Column(
           children: [
             TextField(
+              controller: ecoSwapPostController.title,
               decoration: const InputDecoration(
                 labelText: 'Nama',
               ),
@@ -45,6 +46,7 @@ class EcoSwapPostView extends StatelessWidget {
               height: 10,
             ),
             TextField(
+              controller: ecoSwapPostController.price,
               decoration: const InputDecoration(
                 labelText: 'Harga',
               ),
@@ -57,6 +59,7 @@ class EcoSwapPostView extends StatelessWidget {
               height: 10,
             ),
             TextField(
+              controller: ecoSwapPostController.address,
               decoration: const InputDecoration(
                 labelText: 'Alamat',
               ),
@@ -68,6 +71,7 @@ class EcoSwapPostView extends StatelessWidget {
               height: 10,
             ),
             TextField(
+              controller: ecoSwapPostController.bodys,
               decoration: const InputDecoration(
                 labelText: 'Deskripsi',
               ),
@@ -80,7 +84,7 @@ class EcoSwapPostView extends StatelessWidget {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                ecoSwapPostController.savePlace();
+                ecoSwapPostController.newPost();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: TColors.primary,
